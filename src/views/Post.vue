@@ -1,12 +1,12 @@
 <template>
   <div class="home" v-if="data">
-    <div v-for="(blog, index) in data.allPosts" :key="index">
-        <router-link :to="`/post/${blog.slug}`">{{blog.id}}</router-link>
-        <p>{{blog.slug}}</p>
-        <p>{{blog.title}}</p>
-        <p>{{blog.body}}</p>
-       <datocms-image :data="blog.coverimage.responsiveImage" />
-    </div> 
+    <div v-for="(post, index) in data.allPosts" :key="index">
+        <p>{{post.id}}</p>
+        <p>{{post.slug}}</p>
+        <p>{{post.title}}</p>
+        <p>{{post.body}}</p>
+       <datocms-image :data="post.coverimage.responsiveImage" />
+    </div>
     </div>
 </template>
 
@@ -14,8 +14,8 @@
 import { request } from "@/datocms";
 import { Image } from "vue-datocms";
 
-const HOMEPAGE_QUERY = `query MyQuery {
-  allPosts {
+const POST_QUERY = `query MyQuery($slug: String!){
+  allPosts(filter: { slug: { eq: $slug } }){
     title
     slug
     id
@@ -38,17 +38,20 @@ export default {
   },
   name: "Home",
   data: () => ({
+    uuid: null,
     blog: null,
     data: null,
     error: null,
     loading: true,
   }),
   async created() {
+    this.uuid = this.$route.params.id 
     try {
       this.data = await request({
-        query: HOMEPAGE_QUERY,
+        query: POST_QUERY,
         variables: {
-          limit: 10
+          limit: 10,
+          slug: this.uuid
         }
       });
     } catch (e) {
