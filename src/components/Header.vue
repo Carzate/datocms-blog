@@ -28,6 +28,14 @@
             <v-list-item-title>Acerca De</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item link to="/slider" @click="drawer = false">
+          <v-list-item-action>
+            <v-icon>mdi-apps</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Slider</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
   </div>

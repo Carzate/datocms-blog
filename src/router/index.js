@@ -22,6 +22,11 @@ Vue.use(VueRouter)
     path: '/post/:id',
     name: 'Post',
     component: () => import('../views/Post.vue')
+  },
+  {
+    path: '/slider',
+    name: 'Slider',
+    component: () => import('../views/Slider.vue')
   }
 ]
 
