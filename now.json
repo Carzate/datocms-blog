@@ -1,0 +1,7 @@
+{
+    "build": {
+      "env": {
+        "DATO_API_TOKEN": "2c3e37152df6118c89f505c634951d"
+      }
+    }
+  }
