@@ -1,9 +1,11 @@
 <template>
-  <div class="about" v-if="data">
-      <p>{{data.blogpost.titulo}}</p>
-      <p>{{data.blogpost.descripcion}}</p>
-       <datocms-image :data="data.blogpost.photo.responsiveImage" />
-    </div>
+    <v-container>
+      <div class="about" v-if="data">
+        <p>{{data.blogpost.titulo}}</p>
+        <p>{{data.blogpost.descripcion}}</p>
+        <datocms-image :data="data.blogpost.photo.responsiveImage" />
+      </div>
+     </v-container>
 </template>
   
 

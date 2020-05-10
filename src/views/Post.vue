@@ -1,12 +1,16 @@
 <template>
   <div class="home" v-if="data">
-    <div v-for="(post, index) in data.allPosts" :key="index">
-        <p>{{post.id}}</p>
-        <p>{{post.slug}}</p>
-        <p>{{post.title}}</p>
-        <p>{{post.body}}</p>
-       <datocms-image :data="post.coverimage.responsiveImage" />
-    </div>
+        <v-container>
+            <div v-for="(post, index) in data.allPosts" :key="index">
+                <p>id: {{post.id}}</p>
+                <p>slug: {{post.slug}}</p>
+                <h1 class="text-center display-3 mb-12" style="color: yellow">{{post.title}}</h1>
+                <div v-html="post.body"></div>
+                <div class="d-flex justify-center">
+                    <datocms-image :data="post.coverimage.responsiveImage" />
+                </div>
+            </div>
+        </v-container>
     </div>
 </template>
 
@@ -19,7 +23,7 @@ const POST_QUERY = `query MyQuery($slug: String!){
     title
     slug
     id
-    body
+    body(markdown: true)
     coverimage {
       responsiveImage{
         aspectRatio

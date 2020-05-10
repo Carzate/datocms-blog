@@ -1,16 +1,17 @@
 <template>
-  <div class="home" v-if="data">
-    <div v-for="(blog, index) in data.allPosts" :key="index">
-        <router-link :to="`/post/${blog.slug}`">{{blog.id}}</router-link>
-        <p>{{blog.slug}}</p>
-        <p>{{blog.title}}</p>
-        <p>{{blog.body}}</p>
-       <datocms-image :data="blog.coverimage.responsiveImage" />
+  <div v-if="data">
+    <v-container>
+    <div v-for="(blog, index) in data.allPosts" :key="index" class="mb-12">
+      <router-link class="titulo" :to="`/post/${blog.slug}`">{{blog.title}}</router-link>
+      <p class="mt-4 mb-4">{{blog.excerpt}}</p>
+      <datocms-image :data="blog.coverimage.responsiveImage"/>
     </div> 
+    </v-container>
     </div>
 </template>
 
 <script>
+import Header from '@/components/Header.vue'
 import { request } from "@/datocms";
 import { Image } from "vue-datocms";
 
@@ -19,7 +20,7 @@ const HOMEPAGE_QUERY = `query MyQuery {
     title
     slug
     id
-    body
+    excerpt
     coverimage {
       responsiveImage{
         aspectRatio
@@ -34,7 +35,8 @@ const HOMEPAGE_QUERY = `query MyQuery {
 
 export default {
   components: {
-    "datocms-image": Image
+    "datocms-image": Image,
+    Header
   },
   name: "Home",
   data: () => ({
@@ -58,3 +60,11 @@ export default {
   }
 };
 </script>
+
+<style>
+  .titulo {
+    font-size: 40px;
+    color: pink !important; 
+    text-decoration: none;
+  }
+</style>
